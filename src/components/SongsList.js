@@ -1,13 +1,14 @@
 import React from "react";
-import {connect} from "react-redux"
+import {connect} from "react-redux";
+import {selectSong} from "../actions/"
 
-const SongsList = ({songs}) => {
+const SongsList = ({songs, selectSong}) => {
     const songList = songs.map(song=> 
     <div className="item" key={song.title}>
     <div className="right floated content">
       <button
         className="ui button primary"
-       
+        onClick = {()=>{selectSong(song)}}
       >
         Select
       </button>
@@ -23,7 +24,9 @@ const SongsList = ({songs}) => {
 }
 const mapPropsToState = (state) =>{
     //component receives these as props
-    return {songs: state.songs}
+    return {
+        songs: state.songs
+          }
 
 }
-export default connect(mapPropsToState)(SongsList);
+export default connect(mapPropsToState,{selectSong})(SongsList);
